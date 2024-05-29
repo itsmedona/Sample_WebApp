@@ -5,6 +5,8 @@ import 'package:my_portfolio/widgets/header_mobile.dart';
 import 'package:my_portfolio/widgets/main_desktop.dart';
 import '../constants/size.dart';
 import '../widgets/header_desktop.dart';
+import '../widgets/skills_desktop.dart';
+import '../widgets/skills_mobile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,8 +17,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final scrollController = ScrollController();
+  final List<GlobalKey> navbarKeys = List.generate(4, (index) => GlobalKey());
+
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final screenWidth = screenSize.width;
     return LayoutBuilder(builder: (context, constraints) {
       // for making responsive
       return Scaffold(
@@ -43,15 +50,40 @@ class _HomePageState extends State<HomePage> {
               
               //SKILLS
               Container(
-                height: 500,
-                width: double.maxFinite,
-                color: Colors.blueGrey,
+                key: navbarKeys[1],
+                width: screenWidth,
+                padding: const EdgeInsets.fromLTRB(25, 20, 25, 60),
+                color: ColorConstant.bgLight1,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // title
+                    const Text(
+                      "What I can do",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: ColorConstant.whitePrimary,
+                      ),
+                    ),
+                    const SizedBox(height: 50),
+
+                    // platforms and skills
+                    if (constraints.maxWidth >= kMedDesktopWidth)
+                      const SkillsDesktop()
+                    else
+                      const SkillsMobile(),
+                  ],
+                ),
               ),
-              //PROJECTS
+              const SizedBox(height: 30),
+
+              /*PROJECTS
               Container(
                 height: 500,
                 width: double.maxFinite,
-              ),
+              ),*/
+              
               //CONTACT
               Container(
                 height: 500,
