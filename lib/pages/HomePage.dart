@@ -4,6 +4,7 @@ import 'package:my_portfolio/widgets/drawer_mobile.dart';
 import 'package:my_portfolio/widgets/header_mobile.dart';
 import 'package:my_portfolio/widgets/main_desktop.dart';
 import '../constants/size.dart';
+import '../widgets/contact_section.dart';
 import '../widgets/header_desktop.dart';
 import '../widgets/skills_desktop.dart';
 import '../widgets/skills_mobile.dart';
@@ -46,8 +47,8 @@ class _HomePageState extends State<HomePage> {
                     scaffoldKey.currentState?.openEndDrawer();
                   },
                 ),
-                MainDesktop(),
-              
+              MainDesktop(),
+
               //SKILLS
               Container(
                 key: navbarKeys[1],
@@ -83,20 +84,19 @@ class _HomePageState extends State<HomePage> {
                 height: 500,
                 width: double.maxFinite,
               ),*/
-              
-              //CONTACT
-              Container(
-                height: 500,
-                width: double.maxFinite,
-                color: Colors.blueGrey,
+
+              // CONTACT
+              ContactSection(
+                key: navbarKeys[3],
               ),
-              //FOOTER
-              Container(
-                height: 500,
-                width: double.maxFinite,
-              )
+              const SizedBox(height: 30),
+
+              // FOOTER
+              //const Footer(),
             ],
-          ));
-    });
+          ),
+        );
+   } );
+    }
   }
-}
+
