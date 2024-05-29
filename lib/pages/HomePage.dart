@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/constants/colors.dart';
 import 'package:my_portfolio/constants/nav_titles.dart';
+//import 'package:my_portfolio/styles/style.dart';
+import 'package:my_portfolio/widgets/header_mobile.dart';
+//import 'package:my_portfolio/widgets/header_desktop.dart';
+//import 'package:my_portfolio/widgets/site_logo.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,51 +14,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: scaffoldKey,
         backgroundColor: ColorConstant.scaffoldBg,
+        endDrawer: Drawer(
+          backgroundColor: ColorConstant.scaffoldBg,
+          child: ListView(
+            children: [
+              for (int i = 0; i < navIcons.length; i++)
+                ListTile(
+                  leading: Icon(navIcons[i]),
+                  title: Text(navTitles[i]),
+                )
+            ],
+          ),
+        ),
         body: ListView(
           scrollDirection: Axis.vertical,
           children: [
             //MAIN
-            Container(
-              height: 60.0,
-              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-              width: double.maxFinite,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Colors.transparent, ColorConstant.bgLight1]),
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Row(
-                children: [
-                  Text(
-                    "DS",
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.underline,
-                      color: ColorConstant.yellowSecondary,
-                    ),
-                  ),
-                  Spacer(),
-                  for (int i = 0; i < navTitles.length; i++)
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20.0),
-                      child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          navTitles[i],
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: ColorConstant.whitePrimary),
-                        ),
-                      ),
-                    ),
-                ],
-              ),
+            //HeaderDesktop(),
+            HeaderMobile(
+              onLogoTap: () {},
+              onMenuTap: () {
+                scaffoldKey.currentState?.openEndDrawer();
+              },
             ),
             //SKILLS
             Container(
