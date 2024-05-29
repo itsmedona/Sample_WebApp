@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/pages/HomePage.dart';
+import 'package:my_portfolio/styles/theme.dart';
 
 void main() {
   runApp(WebApp());
@@ -12,7 +13,7 @@ class WebApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
+      theme: kCustomTheme,
       title: 'Dona Shaji',
       home: const HomePage(),
     );

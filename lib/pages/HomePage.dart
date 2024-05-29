@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_portfolio/constants/colors.dart';
 import 'package:my_portfolio/widgets/drawer_mobile.dart';
 import 'package:my_portfolio/widgets/header_mobile.dart';
+import 'package:my_portfolio/widgets/main_desktop.dart';
 import '../constants/size.dart';
 import '../widgets/header_desktop.dart';
 
@@ -21,12 +22,15 @@ class _HomePageState extends State<HomePage> {
       return Scaffold(
           key: scaffoldKey,
           backgroundColor: ColorConstant.scaffoldBg,
-          endDrawer:constraints.maxWidth >= kMinDesktopWidth?null: DrawerMobile(),//ternary oprtr is used end drawer will see only when the size is reduced to mobile size
+          endDrawer: constraints.maxWidth >= kMinDesktopWidth
+              ? null
+              : DrawerMobile(), //ternary oprtr is used end drawer will see only when the size is reduced to mobile size
           body: ListView(
             scrollDirection: Axis.vertical,
             children: [
               //MAIN
-              if (constraints.maxWidth >= kMinDesktopWidth) //checking for responsive
+              if (constraints.maxWidth >=
+                  kMinDesktopWidth) //checking for responsive
                 HeaderDesktop()
               else
                 HeaderMobile(
@@ -35,6 +39,8 @@ class _HomePageState extends State<HomePage> {
                     scaffoldKey.currentState?.openEndDrawer();
                   },
                 ),
+                MainDesktop(),
+              
               //SKILLS
               Container(
                 height: 500,
