@@ -33,7 +33,7 @@ class MainMobile extends StatelessWidget {
             },
             blendMode: BlendMode.srcATop,
             child: Image.asset(
-              "assets/my_flutter_avatar.png",
+              "assets/images/my_flutter_avatar.png",
               width: screenWidth,
             ),
           ),
