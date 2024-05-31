@@ -1,3 +1,4 @@
+import 'dart:js' as js;
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/constants/app_links.dart';
 import 'package:my_portfolio/constants/colors.dart';
@@ -10,8 +11,8 @@ import 'package:my_portfolio/widgets/skills_desktop.dart';
 import 'package:my_portfolio/widgets/skills_mobile.dart';
 import 'package:my_portfolio/widgets/contact_section.dart';
 import 'package:my_portfolio/widgets/header_desktop.dart';
-import 'dart:js' as js;
-import '../constants/size.dart';
+
+import '../view_models.dart/responsive.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,94 +28,87 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final screenWidth = screenSize.width;
+    return Scaffold(
+      key: scaffoldKey,
+      backgroundColor: ColorConstant.scaffoldBg,
+      endDrawer: Responsive.isDesktop(context)
+          ? null
+          : DrawerMobile(onNavItemTap: (int navIndex) {
+              scaffoldKey.currentState?.closeEndDrawer();
+              scrollToSection(navIndex);
+            }),
+      body: SingleChildScrollView(
+        controller: scrollController,
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            SizedBox(key: navbarKeys.first),
 
-    return LayoutBuilder(builder: (context, constraints) {
-      return Scaffold(
-        key: scaffoldKey,
-        backgroundColor: ColorConstant.scaffoldBg,
-        endDrawer: constraints.maxWidth >= kMinDesktopWidth
-            ? null
-            : DrawerMobile(onNavItemTap: (int navIndex) {
-                scaffoldKey.currentState?.closeEndDrawer();
+            // HEADER
+            Responsive(
+              mobile: HeaderMobile(
+                onLogoTap: () {},
+                onMenuTap: () {
+                  scaffoldKey.currentState?.openEndDrawer();
+                },
+              ),
+              desktop: HeaderDesktop(onNavMenuTap: (int navIndex) {
                 scrollToSection(navIndex);
               }),
-        body: SingleChildScrollView(
-          controller: scrollController,
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children: [
-              SizedBox(key: navbarKeys.first),
+            ),
 
-              // MAIN
-              if (constraints.maxWidth >= kMinDesktopWidth)
-                HeaderDesktop(onNavMenuTap: (int navIndex) {
-                  scrollToSection(navIndex);
-                })
-              else
-                HeaderMobile(
-                  onLogoTap: () {},
-                  onMenuTap: () {
-                    scaffoldKey.currentState?.openEndDrawer();
-                  },
-                ),
+            // MAIN
+            Responsive(
+              mobile: const MainMobile(),
+              desktop: const MainDesktop(),
+            ),
 
-              if (constraints.maxWidth >= kMinDesktopWidth)
-                const MainDesktop()
-              else
-                const MainMobile(),
-
-              // SKILLS
-              Container(
-                key: navbarKeys[1],
-                width: screenWidth,
-                padding: const EdgeInsets.fromLTRB(25, 20, 25, 60),
-                color: ColorConstant.bgLight1,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // title
-                    const Text(
-                      "What I can do",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: ColorConstant.whitePrimary,
-                      ),
+            // SKILLS
+            Container(
+              key: navbarKeys[1],
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.fromLTRB(25, 20, 25, 60),
+              color: ColorConstant.bgLight1,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    "What I can do",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: ColorConstant.whitePrimary,
                     ),
-                    const SizedBox(height: 50),
-
-                    // platforms and skills
-                    if (constraints.maxWidth >= kMedDesktopWidth)
-                      const SkillsDesktop()
-                    else
-                      const SkillsMobile(),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 50),
+                  Responsive(
+                    mobile: const SkillsMobile(),
+                    desktop: const SkillsDesktop(),
+                  ),
+                ],
               ),
-              const SizedBox(height: 30),
+            ),
+            const SizedBox(height: 30),
 
-/*   // PROJECTS
-              ProjectsSection(
-                key: navbarKeys[2],
-              ),
-*/
-              const SizedBox(height: 30),
+            /* // PROJECTS
+            ProjectsSection(
+              key: navbarKeys[2],
+            ),
+            */
+            const SizedBox(height: 30),
 
-              // CONTACT
-              ContactSection(
-                key: navbarKeys[3],
-              ),
-              const SizedBox(height: 30),
+            // CONTACT
+            ContactSection(
+              key: navbarKeys[3],
+            ),
+            const SizedBox(height: 30),
 
-              // FOOTER
-              Footer(),
-            ],
-          ),
+            // FOOTER
+            Footer(),
+          ],
         ),
-      );
-    });
+      ),
+    );
   }
 
   void scrollToSection(int navIndex) {
@@ -125,10 +119,12 @@ class _HomePageState extends State<HomePage> {
     }
 
     final key = navbarKeys[navIndex];
-    Scrollable.ensureVisible(
-      key.currentContext!,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
+    if (key.currentContext != null) {
+      Scrollable.ensureVisible(
+        key.currentContext!,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
   }
 }
