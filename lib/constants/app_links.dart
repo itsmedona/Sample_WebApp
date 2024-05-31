@@ -3,4 +3,5 @@ class AppLinks {
   static const instagram = "https://";
   static const linkedIn = "https://";
   static const telegram = "https://";
+  static const blog = "";
 }

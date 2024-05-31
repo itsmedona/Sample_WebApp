@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/pages/HomePage.dart';
-import 'package:my_portfolio/styles/theme.dart';
+
+import 'pages/AboutPage.dart';
+import 'pages/ContactsPage.dart';
+import 'pages/ProjectsPage.dart';
 
 void main() {
   runApp(WebApp());
 }
 
 class WebApp extends StatelessWidget {
-  const WebApp({super.key});
+  const WebApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: kCustomTheme,
-      title: 'Dona Shaji',
-      home: const HomePage(),
+      title: 'My Portfolio',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(),
+        '/about': (context) => const AboutPage(),
+        '/projects': (context) => const ProjectsPage(),
+        '/contact': (context) => const ContactPage(),
+      },
     );
   }
 }
