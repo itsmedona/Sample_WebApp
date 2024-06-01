@@ -11,8 +11,8 @@ import 'package:my_portfolio/widgets/skills_desktop.dart';
 import 'package:my_portfolio/widgets/skills_mobile.dart';
 import 'package:my_portfolio/widgets/contact_section.dart';
 import 'package:my_portfolio/widgets/header_desktop.dart';
-
 import '../view_models.dart/responsive.dart';
+import '../widgets/projects_section.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -90,11 +90,11 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 30),
 
-            /* // PROJECTS
+            // PROJECTS
             ProjectsSection(
               key: navbarKeys[2],
             ),
-            */
+
             const SizedBox(height: 30),
 
             // CONTACT
