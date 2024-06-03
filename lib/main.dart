@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/pages/HomePage.dart';
 import 'package:my_portfolio/widgets/projects_section.dart';
@@ -22,6 +24,7 @@ class WebApp extends StatelessWidget {
         '/': (context) => const HomePage(),
         '/about': (context) => const AboutPage(),
         '/projects': (context) => const ProjectsSection(),
+       
         '/contact': (context) => const ContactPage(),
       },
     );

@@ -1,6 +1,4 @@
-import 'dart:js' as js;
 import 'package:flutter/material.dart';
-import 'package:my_portfolio/constants/app_links.dart';
 import 'package:my_portfolio/constants/colors.dart';
 import 'package:my_portfolio/widgets/drawer_mobile.dart';
 import 'package:my_portfolio/widgets/footer.dart';
@@ -11,8 +9,10 @@ import 'package:my_portfolio/widgets/skills_desktop.dart';
 import 'package:my_portfolio/widgets/skills_mobile.dart';
 import 'package:my_portfolio/widgets/contact_section.dart';
 import 'package:my_portfolio/widgets/header_desktop.dart';
+import '../constants/app_links.dart';
 import '../view_models.dart/responsive.dart';
 import '../widgets/projects_section.dart';
+import 'dart:js' as js;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,7 +24,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final scrollController = ScrollController();
-  final List<GlobalKey> navbarKeys = List.generate(4, (index) => GlobalKey());
+  final List<GlobalKey> navbarKeys = List.generate(6, (index) => GlobalKey());
 
   @override
   Widget build(BuildContext context) {
@@ -118,8 +118,13 @@ class _HomePageState extends State<HomePage> {
       return;
     }
 
-    final key = navbarKeys[navIndex];
-    if (key.currentContext != null) {
+    // Adjust for navigation to About and Contact pages
+    if (navIndex == 5) {
+      Navigator.pushNamed(context, '/about');
+    } else if (navIndex == 6) {
+      Navigator.pushNamed(context, '/contact');
+    } else {
+      final key = navbarKeys[navIndex];
       Scrollable.ensureVisible(
         key.currentContext!,
         duration: const Duration(milliseconds: 500),
