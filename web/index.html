@@ -32,6 +32,30 @@
   <title>my_portfolio</title>
   <link rel="manifest" href="manifest.json">
 
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyCrmJSgJXRBFJJbx_AQhAmkz7hb36bkg9g",
+      authDomain: "myfrstwebapp.firebaseapp.com",
+      projectId: "myfrstwebapp",
+      storageBucket: "myfrstwebapp.appspot.com",
+      messagingSenderId: "571841390889",
+      appId: "1:571841390889:web:91bcb7ef4ddda11f1a6f38",
+      measurementId: "G-EHBGKS3BE5"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+
   <script>
     // The value below is injected by flutter build, do not touch.
     const serviceWorkerVersion = null;

@@ -9,10 +9,10 @@ import 'package:my_portfolio/widgets/skills_desktop.dart';
 import 'package:my_portfolio/widgets/skills_mobile.dart';
 import 'package:my_portfolio/widgets/contact_section.dart';
 import 'package:my_portfolio/widgets/header_desktop.dart';
-import '../constants/app_links.dart';
+//import '../constants/app_links.dart';
 import '../view_models.dart/responsive.dart';
 import '../widgets/projects_section.dart';
-import 'dart:js' as js;
+//import 'dart:js' as js;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -112,17 +112,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   void scrollToSection(int navIndex) {
-    if (navIndex == 4) {
-      // open a blog page
-      js.context.callMethod('open', [AppLinks.blog]);
-      return;
-    }
-
     // Adjust for navigation to About and Contact pages
-    if (navIndex == 5) {
+    if (navIndex == 4) {
       Navigator.pushNamed(context, '/about');
-    } else if (navIndex == 6) {
-      Navigator.pushNamed(context, '/contact');
+    } else if (navIndex == 5) {
+      Navigator.pushNamed(context, '/about');
     } else {
       final key = navbarKeys[navIndex];
       Scrollable.ensureVisible(
