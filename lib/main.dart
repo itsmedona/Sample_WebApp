@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:my_portfolio/pages/home_page.dart';
 import 'package:my_portfolio/widgets/projects_section.dart';
 import 'pages/about_page.dart';
-import 'pages/contacts_page.dart';
-//import 'pages/ProjectsPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,8 +27,6 @@ class WebApp extends StatelessWidget {
       routes: {
         '/': (context) => const HomePage(),
         '/about': (context) => const AboutPage(),
-        '/projects': (context) => const ProjectsSection(),
-        '/contact': (context) => const ContactPage(),
       },
     );
   }
