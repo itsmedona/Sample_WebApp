@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_portfolio/constants/colors.dart';
 
 import '../styles/style.dart';
 import 'site_logo.dart';
@@ -23,6 +24,7 @@ class HeaderMobile extends StatelessWidget {
           IconButton(
             onPressed: onMenuTap,
             icon: Icon(Icons.menu),
+            color: ColorConstant.whitePrimary,
           ),
           SizedBox(width: 15)
         ],

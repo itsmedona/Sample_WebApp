@@ -27,6 +27,7 @@ class DrawerMobile extends StatelessWidget {
                   Navigator.of(context).pop();
                 },
                 icon: const Icon(Icons.close),
+                color: ColorConstant.whitePrimary,
               ),
             ),
           ),
@@ -44,6 +45,7 @@ class DrawerMobile extends StatelessWidget {
                 onNavItemTap(i);
               },
               leading: Icon(navIcons[i]),
+              iconColor: ColorConstant.whitePrimary,
               title: Text(navTitles[i]),
             )
         ],
