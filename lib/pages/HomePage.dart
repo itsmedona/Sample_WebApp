@@ -9,10 +9,9 @@ import 'package:my_portfolio/widgets/skills_desktop.dart';
 import 'package:my_portfolio/widgets/skills_mobile.dart';
 import 'package:my_portfolio/widgets/contact_section.dart';
 import 'package:my_portfolio/widgets/header_desktop.dart';
-//import '../constants/app_links.dart';
 import '../view_models.dart/responsive.dart';
 import '../widgets/projects_section.dart';
-//import 'dart:js' as js;
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
