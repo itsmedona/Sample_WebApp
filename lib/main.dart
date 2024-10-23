@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_portfolio/pages/home_page.dart';
-import 'package:my_portfolio/widgets/projects_section.dart';
 import 'pages/about_page.dart';
 
 void main() async {
